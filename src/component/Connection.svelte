@@ -1,12 +1,11 @@
-<script>
-    // export let connectStatus;
+<script lang="ts">
     import {store} from '$lib/store';
     import {onMount} from 'svelte';
     import {fly} from 'svelte/transition'
 
-    let connectionText = '';
-    let circleColor;
-    let connectionStatus;
+    let connectionText:String;
+    let circleColor:String;
+    let connectionStatus:number;
 
     onMount(async () => {
         store.subscribe(store => {

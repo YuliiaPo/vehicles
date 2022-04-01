@@ -1,6 +1,6 @@
-<script>
+<script lang="ts">
     import { createEventDispatcher } from 'svelte';
-    export let filtres;
+    export let filtres:Array<String>;
 
     const dispatch = createEventDispatcher()
 

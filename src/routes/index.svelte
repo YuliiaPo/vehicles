@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import {onMount} from 'svelte';
     import Vehicles from '../component/Vehicles.svelte';
     import Filter from '../component/Filter.svelte';
@@ -8,7 +8,7 @@
 
     let filtres = Array();
     let vehicles = Array();
-    let connectStatus;
+    let connectStatus:number;
 
     onMount(async () => {
         connect();

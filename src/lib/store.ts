@@ -39,6 +39,7 @@ export const connect = () => {
         store.update((s: Store) => {
             return {...s, error: "Unable to connect" 
         }});
+        throw new Error('Unable to connect');
         return;
     }
 
@@ -49,13 +50,18 @@ export const connect = () => {
     });
 
     ws.addEventListener('message', (message: any) => {
-        const data = JSON.parse(message.data).data;
-        if(ws.readyState !== get(store).connectionStatus){
-            store.update((store) => ({ ...store, connectionStatus: ws.readyState }));
+        try {
+            const data = JSON.parse(message.data).data;
+            if(ws.readyState !== get(store).connectionStatus){
+                store.update((store) => ({ ...store, connectionStatus: ws.readyState }));
+            }
+            if(data){
+                updateVehicles(data);
+            }
+        } catch (error) {
+            console.error(error);
         }
-        if(data){
-            updateVehicles(data);
-        }
+
     });
 
     ws.addEventListener('close', (_message: any) => {
